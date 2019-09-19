@@ -316,6 +316,8 @@ class MasterLocustRunner(DistributedLocustRunner):
         self.state = STATE_STOPPING
         for client in self.clients.all:
             self.server.send_to_client(Message("stop", None, client.id))
+        self.num_clients = 0
+        self.hatch_rate = 0
         events.master_stop_hatching.fire()
     
     def quit(self):
